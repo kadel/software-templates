@@ -5,7 +5,11 @@ kind: ${{ values.entityKind }}
 kind: Component
 {%- endif %}
 metadata:
+  {%- if values.componentName %}
+  name: ${{ values.componentName }}
+  {%- else %}
   name: ${{ values.repoName }}
+  {%- endif %}
   {%- if values.description %}
   description: ${{ values.description }}
   {%- endif %}
@@ -21,8 +25,14 @@ metadata:
     github.com/project-slug: ${{ values.githubOrg }}/${{ values.repoName }}
 spec:
   type: ${{ values.applicationType }}
+  {%- if values.system %}
   system: ${{ values.system }}
+  {%- endif %}
+  {%- if values.lifecycle %}
+  lifecycle: ${{ values.lifecycle }}
+  {%- else %}
   lifecycle: production
+  {%- endif %}
   owner: ${{ values.owner }}
   {%- if values.dependsOn %}
   dependsOn:
