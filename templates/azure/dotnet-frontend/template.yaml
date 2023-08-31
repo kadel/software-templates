@@ -105,12 +105,17 @@ spec:
           port: ${{ parameters.port }}
           applicationType: website
           sourceControl: dev.azure.com
+    - action: debug:log
+      id: write-workspace-directory
+      name: List the workspace directory
+      input:
+        listWorkspace: true
 
     - id: publish
       name: Publishing to the Source Code Repository
       action: publish:azure
       input:
-        allowedHosts: ['dev.azure.com']
+        allowedHosts: ["dev.azure.com"]
         description: ${{ parameters.description }}
         repoUrl: dev.azure.com?owner=${{ parameters.projectName }}&repo=${{ parameters.repoName }}&organization=${{ parameters.orgName }}
         defaultBranch: main
